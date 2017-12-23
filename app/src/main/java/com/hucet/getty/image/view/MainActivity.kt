@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.hucet.getty.image.R
-import com.hucet.getty.image.glide.GlideApp
 import com.hucet.getty.image.view.adapter.GettyAdapter
 import com.hucet.getty.image.viewmodel.GettyViewModel
 import dagger.android.AndroidInjector
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
             setRecyclerListener {
                 if (it is GettyAdapter.GettyImageViewHolder) {
                     it.thumbnail.clearAnimation()
-                    GlideApp.with(this).clear(it.thumbnail)
+                    Glide.with(this).clear(it.thumbnail)
                 }
             }
         }
