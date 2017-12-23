@@ -16,7 +16,7 @@ import javax.inject.Inject
 /**
  * Created by taesu on 2017-12-23.
  */
-class GettyApplication : Application(), HasActivityInjector {
+open class GettyApplication : Application(), HasActivityInjector {
 
 
     override fun onCreate() {

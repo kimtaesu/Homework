@@ -1,6 +1,8 @@
 package com.hucet.getty.image.view
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
@@ -17,16 +19,16 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
-    @Inject lateinit var viewModel: GettyViewModel
+    lateinit var viewModel: GettyViewModel
     @Inject lateinit var adapter: GettyAdapter
-
+    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initRecyclerView()
         requestFetch()
         initImageLiveData()
-
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(GettyViewModel::class.java)
     }
 
     private fun initRecyclerView() {
