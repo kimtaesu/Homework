@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/kimtaesu/CleanGallery.svg?branch=master)](https://travis-ci.org/kimtaesu/CleanGaller)
+[![Build Status](https://travis-ci.org/kimtaesu/Homework.svg?branch=master)](https://travis-ci.org/kimtaesu/Homework)
 
 
 ## Languages, libraries and tools used
