@@ -3,6 +3,7 @@ package com.hucet.getty.image.viewmodel
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
+import android.widget.HeterogeneousExpandableList
 import com.hucet.getty.image.Rx2TestSchedulerRule
 import com.hucet.getty.image.TestApplication
 import com.hucet.getty.image.model.GettyImage
@@ -64,14 +65,14 @@ class GettyViewModelTest {
         verify(errorObser, never()).onChanged(any())
     }
 
-    @Ignore
     @Test
     fun errorFetch() {
-        whenever(fetcher.getImages()).thenThrow(RuntimeException("Hello"))
+        val exception = RuntimeException("Hello")
+        whenever(fetcher.getImages()).thenReturn(Single.just(1).map { throw exception })
 
         viewModel.requestFetch()
         testScheduler.advanceTimeBy(1, TimeUnit.SECONDS)
         verify(observer, never()).onChanged(any())
-        verify(errorObser, times(1)).onChanged(any())
+        verify(errorObser, times(1)).onChanged(exception)
     }
 }
