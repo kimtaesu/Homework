@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply from: "config.gradle"
 
 android {
     compileSdkVersion 26
@@ -56,7 +55,6 @@ dependencies {
     implementation rxDeps.rxKotlin
     implementation rxDeps.rxAndroid
     implementation opensourceDeps.timber
-    implementation opensourceDeps.gson
 
     implementation opensourceDeps.jsoup
 
@@ -90,16 +88,6 @@ dependencies {
     testImplementation junit5.unitTests()
     testImplementation junit5.parameterized()
     testCompileOnly junit5.unitTestsRuntime()
-
-
-
-    implementation httpDeps.okHttp
-    implementation httpDeps.okHttpLogger
-    implementation httpDeps.converter_moshi
-    implementation httpDeps.retrofit
-    implementation httpDeps.retrofitRxjavaAdapter
-
-    testImplementation testDeps.mockWebServer
 
     debugImplementation debugDeps.stetho
 
