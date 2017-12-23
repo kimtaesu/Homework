@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.hucet.getty.image.R
@@ -25,10 +26,11 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(GettyViewModel::class.java)
         initRecyclerView()
         requestFetch()
         initImageLiveData()
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(GettyViewModel::class.java)
+
     }
 
     private fun initRecyclerView() {
@@ -59,7 +61,6 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     @Inject
     lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
-        return fragmentDispatchingAndroidInjector
-    }
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> =
+            fragmentDispatchingAndroidInjector
 }
