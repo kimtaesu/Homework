@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                     Glide.with(this).clear(it.thumbnail)
                 }
             }
+            setHasFixedSize(true)
         }
     }
 
