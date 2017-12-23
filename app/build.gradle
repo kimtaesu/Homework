@@ -1,0 +1,109 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply from: "config.gradle"
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.hucet.getty.image"
+        minSdkVersion 21
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+// junit5 doesn't support android projects out of the box
+apply plugin: "de.mannodermaus.android-junit5"
+junitPlatform {
+    filters {
+        engines {
+            include 'spek'
+            include 'junit-vintage'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation kotlinDeps.kotlin
+    testImplementation kotlinDeps.kotlinReflect
+
+    implementation androidSupportDeps.androidSupportV7
+    implementation androidSupportDeps.constraintLayout
+    implementation androidSupportDeps.supportRecyclerView
+    implementation androidSupportDeps.supportDesign
+    implementation androidSupportDeps.archRuntime
+    implementation androidSupportDeps.archRoomRxjava2
+    kapt androidSupportDeps.archRoomCompiler
+    implementation androidSupportDeps.archPaging
+    testImplementation androidSupportDeps.archRoomtesting
+    testImplementation androidSupportDeps.archCoreTest
+    kapt androidSupportDeps.dataBinding
+
+    implementation rxDeps.rxKotlin
+    implementation rxDeps.rxAndroid
+    implementation opensourceDeps.timber
+    implementation opensourceDeps.gson
+
+    implementation opensourceDeps.jsoup
+
+    implementation daggerDeps.dagger
+    implementation daggerDeps.daggerSupport
+    kapt daggerDeps.daggerCompiler
+    kapt daggerDeps.daggerProcessor
+    compileOnly daggerDeps.javaxAnnotation
+
+    kapt opensourceDeps.glideCompiler
+    implementation opensourceDeps.glide
+
+    testImplementation testDeps.mock
+    testImplementation testDeps.mockInline
+    testImplementation testDeps.robolectric
+
+
+    testImplementation(testDeps.spekApi) {
+        exclude group: "org.jetbrains.kotlin"
+    }
+    testImplementation(testDeps.spekJunitEngine) {
+        exclude group: "org.junit.platform"
+        exclude group: "org.jetbrains.kotlin"
+    }
+    testImplementation testDeps.spekSubject
+
+    testImplementation testDeps.junitPlatformEngine
+    testImplementation testDeps.kluent
+    testImplementation testDeps.kluentAndroid
+
+    testImplementation junit5.unitTests()
+    testImplementation junit5.parameterized()
+    testCompileOnly junit5.unitTestsRuntime()
+
+
+
+    implementation httpDeps.okHttp
+    implementation httpDeps.okHttpLogger
+    implementation httpDeps.converter_moshi
+    implementation httpDeps.retrofit
+    implementation httpDeps.retrofitRxjavaAdapter
+
+    testImplementation testDeps.mockWebServer
+
+    debugImplementation debugDeps.stetho
+
+}
+repositories {
+    maven { url 'https://jitpack.io' }
+}
